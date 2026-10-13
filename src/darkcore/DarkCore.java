@@ -1,8 +1,8 @@
 package darkcore;
 
-import darkcore.content.DarkArmyBlocks;
-import darkcore.content.DarkArmyTechTree;
+
 import darkcore.content.DarkArmyUnits;
+import darkcore.content.DarkCoreBulletType;
 import mindustry.mod.*;
 
 public class DarkCore extends Mod {
@@ -10,6 +10,7 @@ public class DarkCore extends Mod {
 
     @Override
     public void loadContent() {
+
 
         DarkArmyUnits.loadContent();
 

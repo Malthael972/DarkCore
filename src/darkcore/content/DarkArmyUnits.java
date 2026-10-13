@@ -3,7 +3,6 @@ package darkcore.content;
 import arc.graphics.Color;
 import arc.math.geom.Rect;
 import mindustry.content.*;
-import mindustry.entities.bullet.BasicBulletType;
 import mindustry.gen.Sounds;
 import mindustry.type.UnitType;
 import mindustry.type.Weapon;
@@ -19,10 +18,10 @@ public class DarkArmyUnits extends UnitTypes {
         darkStell = new TankUnitType("dark-stell"){{
             hitSize = 12f;
             treadPullOffset = 3;
-            speed = 0.75f;
+            speed = 0.80f;
             rotateSpeed = 3.5f;
-            health = 850;
-            armor = 6f;
+            health = 1000;
+            armor = 7f;
             itemCapacity = 0;
             floorMultiplier = 0.95f;
             treadRects = new Rect[]{new Rect(12 - 32f, 7 - 32f, 14, 51)};
@@ -34,7 +33,7 @@ public class DarkArmyUnits extends UnitTypes {
             weapons.add(new Weapon("stell-weapon"){{
                 shootSound = Sounds.shootStell;
                 layerOffset = 0.0001f;
-                reload = 50f;
+                reload = 40f;
                 shootY = 4.5f;
                 recoil = 1f;
                 rotate = true;
@@ -45,19 +44,30 @@ public class DarkArmyUnits extends UnitTypes {
                 heatColor = Color.valueOf("f9350f");
                 cooldownTime = 30f;
 
-                bullet = new BasicBulletType(4f, 40){{
-                    sprite = "missile-large";
-                    smokeEffect = Fx.shootBigSmoke;
-                    shootEffect = Fx.shootBigColor;
-                    width = 5f;
-                    height = 7f;
-                    lifetime = 40f;
-                    hitSize = 4f;
-                    hitColor = backColor = trailColor = Color.valueOf("feb380");
-                    frontColor = Color.white;
-                    trailWidth = 1.7f;
-                    trailLength = 5;
-                    despawnEffect = hitEffect = Fx.hitBulletColor;
+                bullet = new DarkCoreBulletType(){{
+                    speed = 0f;
+                    maxHops = 8;
+                    firstRange = 200f;
+                    hopRange = 90f;
+                    lifetime = 1f;
+
+                    damage = 150f;
+                    splashDamage = 50f;
+                    splashDamageRadius = 50f;
+
+                    collides = false;
+                    collidesTiles = false;
+                    hittable = false;
+                    absorbable = false;
+                    reflectable = false;
+                    keepVelocity = false;
+
+                    despawnEffect = Fx.none;
+                    hitEffect = Fx.hitLancer;
+                    lightningColor = Color.valueOf("8a4bff");
+                    setDefaults = false;
+                    status = StatusEffects.shocked;
+
                 }};
             }});
         }};
